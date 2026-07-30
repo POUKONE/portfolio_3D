@@ -285,3 +285,36 @@
   padding: 2px 8px;
   border-radius: 999px;
 }
+
+.fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+
+.firework-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: firework-burst 1.2s ease-out forwards;
+  box-shadow: 0 0 8px currentColor;
+}
+
+@keyframes firework-burst {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.4);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(1);
+    opacity: 0;
+  }
+}
