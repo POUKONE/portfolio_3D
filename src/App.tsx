@@ -6,7 +6,7 @@ import { Panel } from './components/overlay/Panel'
 import { HomePanel } from './components/overlay/HomePanel'
 import { CareerPanel } from './components/overlay/CareerPanel'
 import { ProjectsPanel } from './components/overlay/ProjectsPanel'
-import { BALL_CURSOR } from './cursor'
+import { TROPHY_CURSOR } from './cursor'
 
 export type PanelKey = 'home' | 'career' | 'projects' | null
 
@@ -68,7 +68,7 @@ function App() {
   }
 
   return (
-    <div className="experience" style={{ cursor: BALL_CURSOR }}>
+    <div className="experience" style={{ cursor: TROPHY_CURSOR }}>
       <div className="canvas-wrap">
         <Scene isNight={isNight} onOpenPanel={setActivePanel} onWhistle={playWhistle} />
       </div>

@@ -132,7 +132,7 @@ function useFabricTexture(baseColor: string) {
 export function Figure({
   position,
   rotationY = 0,
-  scale = 1,
+  scale = 1.15,
   jerseyColor,
   shortsColor,
   sockColor,
@@ -208,7 +208,7 @@ export function Figure({
     >
       {interactive && <GlowRing radius={0.45} color="#8fcf9e" position={[0, 0.02, 0]} />}
       {interactive && hovered && hoverLabel && (
-        <Html position={[0, 2.05, 0]} center distanceFactor={11} occlude>
+        <Html position={[0, 2.05 * scale, 0]} center distanceFactor={11} occlude>
           <div className="hotspot-label">{hoverLabel}</div>
         </Html>
       )}
