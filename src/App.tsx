@@ -4,13 +4,26 @@ import { Splash } from './components/Splash'
 import { Scene } from './components/Scene'
 import { Panel } from './components/overlay/Panel'
 import { HomePanel } from './components/overlay/HomePanel'
-import { CareerPanel } from './components/overlay/CareerPanel'
+import { ExperiencePanel } from './components/overlay/ExperiencePanel'
 import { ProjectsPanel } from './components/overlay/ProjectsPanel'
+import { FormationPanel } from './components/overlay/FormationPanel'
+import { CompetencesPanel } from './components/overlay/CompetencesPanel'
+import { InterestsPanel } from './components/overlay/InterestsPanel'
+import { LanguagesPanel } from './components/overlay/LanguagesPanel'
 import { ContactPanel } from './components/overlay/ContactPanel'
 import { Fireworks } from './components/overlay/Fireworks'
 import { TROPHY_CURSOR } from './cursor'
 
-export type PanelKey = 'home' | 'career' | 'projects' | 'contact' | null
+export type PanelKey =
+  | 'home'
+  | 'projects'
+  | 'formation'
+  | 'experience'
+  | 'competences'
+  | 'interests'
+  | 'languages'
+  | 'contact'
+  | null
 
 function App() {
   const [entered, setEntered] = useState(false)
@@ -121,8 +134,12 @@ function App() {
       {activePanel && (
         <Panel onClose={() => setActivePanel(null)}>
           {activePanel === 'home' && <HomePanel />}
-          {activePanel === 'career' && <CareerPanel />}
           {activePanel === 'projects' && <ProjectsPanel />}
+          {activePanel === 'formation' && <FormationPanel />}
+          {activePanel === 'experience' && <ExperiencePanel />}
+          {activePanel === 'competences' && <CompetencesPanel />}
+          {activePanel === 'interests' && <InterestsPanel />}
+          {activePanel === 'languages' && <LanguagesPanel />}
           {activePanel === 'contact' && <ContactPanel />}
         </Panel>
       )}

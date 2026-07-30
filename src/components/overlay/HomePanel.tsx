@@ -26,8 +26,8 @@ export function HomePanel() {
       </div>
 
       <p style={{ marginTop: 18 }}>
-        Click the <strong>goals</strong> on the pitch to see career history, or the{' '}
-        <strong>ball</strong> to see the project lineup.
+        Click any <strong>player</strong> on the pitch to open a section, or shoot at the{' '}
+        <strong>far goal</strong> to get in touch.
       </p>
     </div>
   )

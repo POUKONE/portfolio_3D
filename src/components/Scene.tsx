@@ -24,7 +24,8 @@ const TEAM_KIT = {
 }
 
 // 3-1-2 formation, entirely inside the lower half of the pitch (z > 0, closest to the default camera).
-// Each player IS a section of the portfolio: back three -> Career, midfielder -> Home, forwards -> Projects.
+// Each player IS a section of the portfolio: back three -> Formation/Experience/Compétences,
+// midfielder -> Intérêts & Loisirs, forwards -> Projets/Langues. Contact lives on the far goal.
 const FORMATION_3_1_2: {
   position: [number, number, number]
   rotationY: number
@@ -32,12 +33,12 @@ const FORMATION_3_1_2: {
   panel: PanelKey
   label: string
 }[] = [
-  { position: [-9, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'career', label: 'Career' },
-  { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'career', label: 'Career' },
-  { position: [9, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'career', label: 'Career' },
-  { position: [0, 0, 7], rotationY: Math.PI, number: 8, panel: 'home', label: 'About Me' },
-  { position: [-6.5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projects' },
-  { position: [6.5, 0, 2], rotationY: Math.PI + 0.4, number: 9, panel: 'projects', label: 'Projects' },
+  { position: [-9, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'formation', label: 'Formation' },
+  { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'experience', label: 'Experience' },
+  { position: [9, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'competences', label: 'Compétences' },
+  { position: [0, 0, 7], rotationY: Math.PI, number: 8, panel: 'interests', label: 'Intérêts' },
+  { position: [-6.5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projets' },
+  { position: [6.5, 0, 2], rotationY: Math.PI + 0.4, number: 9, panel: 'languages', label: 'Langues' },
 ]
 
 // Coach: inside the stadium bowl, on the touchline (not on the pitch itself)
