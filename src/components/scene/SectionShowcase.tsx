@@ -339,7 +339,7 @@ function ProjectsShowcase() {
     <group>
       <mesh position={[0, 0.5, 0]}>
         <planeGeometry args={[1, 0.62]} />
-        <meshBasicMaterial map={texture} toneMapped={false} />
+        <meshBasicMaterial map={texture} toneMapped={false} side={THREE.DoubleSide} />
       </mesh>
       <mesh position={[-0.42, 0.05, 0]}>
         <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
@@ -369,7 +369,7 @@ function LanguagesShowcase() {
       {badges.map((b, i) => (
         <mesh key={i} position={[b.x, 0.35, 0]}>
           <planeGeometry args={[0.32, 0.4]} />
-          <meshBasicMaterial map={b.texture} transparent toneMapped={false} />
+          <meshBasicMaterial map={b.texture} transparent toneMapped={false} side={THREE.DoubleSide} />
         </mesh>
       ))}
     </group>
