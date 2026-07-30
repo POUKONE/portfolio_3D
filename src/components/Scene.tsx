@@ -169,6 +169,11 @@ export function Scene({
           sockColor="#111111"
           shoeColor="#111111"
           whistleColor="#e11d1d"
+          onClick={() => {
+            onWhistle()
+            onOpenPanel('help')
+          }}
+          hoverLabel="Help"
         />
 
         {/* Coach, inside the stadium on the touchline (not on the pitch), black tuxedo + sunglasses */}
