@@ -44,7 +44,7 @@ export function Scoreboard({
         anchorX="center"
         anchorY="middle"
       >
-        0 : 0 — click to kickoff
+        0 : 0 — cliquez pour le coup d'envoi
       </Text>
     </group>
   )

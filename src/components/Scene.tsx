@@ -37,7 +37,7 @@ const FORMATION_3_1_2: {
   label: string
 }[] = [
   { position: [-9, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'formation', label: 'Formation' },
-  { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'experience', label: 'Experience' },
+  { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'experience', label: 'Expérience' },
   { position: [9, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'competences', label: 'Compétences' },
   { position: [0, 0, 7], rotationY: Math.PI, number: 8, panel: 'interests', label: 'Intérêts' },
   { position: [-6.5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projets' },
@@ -46,6 +46,7 @@ const FORMATION_3_1_2: {
 
 // Coach: inside the stadium bowl, on the touchline (not on the pitch itself)
 const COACH_POSITION: [number, number, number] = [-(PITCH_WIDTH / 2 + 2), 0, 6]
+const REFEREE_POSITION: [number, number, number] = [1.8, 0, 1.2]
 
 const FAR_GOAL_POSITION: [number, number, number] = [0, 0, -PITCH_LENGTH / 2]
 const SHOT_SPEED = 11 // units per second — a struck shot on goal, faster than the normal roll
@@ -115,6 +116,15 @@ export function Scene({
     setBallTarget([position[0], BALL_RADIUS, position[2] + 1.4])
   }
 
+  // The referee doesn't need the ball to roll to him, so the camera eases in
+  // immediately instead of waiting for an arrival that never happens.
+  function selectReferee(position: [number, number, number]) {
+    onWhistle()
+    setSectionAnchor(position)
+    setCameraFocus(focusFromAnchor(position))
+    onOpenPanel('help')
+  }
+
   function handleBallArrived() {
     const panel = pendingPanelRef.current
     const anchor = pendingAnchorRef.current
@@ -162,18 +172,15 @@ export function Scene({
         ))}
 
         <Figure
-          position={[1.8, 0, 1.2]}
+          position={REFEREE_POSITION}
           rotationY={-1.2}
           jerseyColor="#111111"
           shortsColor="#111111"
           sockColor="#111111"
           shoeColor="#111111"
           whistleColor="#e11d1d"
-          onClick={() => {
-            onWhistle()
-            onOpenPanel('help')
-          }}
-          hoverLabel="Help"
+          onClick={() => selectReferee(REFEREE_POSITION)}
+          hoverLabel="Aide"
         />
 
         {/* Coach, inside the stadium on the touchline (not on the pitch), black tuxedo + sunglasses */}

@@ -1,24 +1,25 @@
 export function HomePanel() {
   return (
     <div>
-      <span className="tag">Starting XI</span>
+      <span className="tag">Titulaire</span>
       <h2>Ibrahima Poukone</h2>
       <p style={{ marginBottom: 18 }}>
-        Data Lover — playing every position from raw pipeline to polished dashboard. Replace
-        this copy with your own TLDR, the same way a manager reads out the matchday lineup.
+        Passionné de data — je joue à tous les postes, du pipeline brut au tableau de bord
+        soigné. Remplace ce texte par ton propre résumé, comme un manager annonce la
+        composition avant le match.
       </p>
 
       <div className="stat-row">
-        <span>Position</span>
-        <span>Data Lover</span>
+        <span>Poste</span>
+        <span>Passionné de Data</span>
       </div>
       <div className="stat-row">
-        <span>Years in the league</span>
+        <span>Années dans le métier</span>
         <span>10+</span>
       </div>
       <div className="stat-row">
-        <span>Signature move</span>
-        <span>Turning prototypes into production</span>
+        <span>Coup de signature</span>
+        <span>Transformer les prototypes en production</span>
       </div>
       <div className="stat-row">
         <span>Club</span>
@@ -26,8 +27,8 @@ export function HomePanel() {
       </div>
 
       <p style={{ marginTop: 18 }}>
-        Click any <strong>player</strong> on the pitch to open a section, or shoot at the{' '}
-        <strong>far goal</strong> to get in touch.
+        Clique sur un <strong>joueur</strong> du terrain pour ouvrir une section, ou tire dans
+        le <strong>but lointain</strong> pour me contacter.
       </p>
     </div>
   )

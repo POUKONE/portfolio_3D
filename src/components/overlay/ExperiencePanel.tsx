@@ -1,30 +1,30 @@
 const EXPERIENCE = [
   {
-    club: 'Current Club Inc.',
-    role: 'Senior Architect',
-    period: '2022 - Present',
-    notes: 'Leading platform architecture and mentoring the squad.',
+    club: 'Club Actuel Inc.',
+    role: 'Architecte Senior',
+    period: '2022 - Présent',
+    notes: 'Direction de l’architecture de la plateforme et mentorat de l’équipe.',
   },
   {
-    club: 'Previous Club Co.',
-    role: 'Technical Architect',
+    club: 'Club Précédent Co.',
+    role: 'Architecte Technique',
     period: '2019 - 2022',
-    notes: 'Led the frontend chapter and design system rollout.',
+    notes: 'Direction du pôle frontend et déploiement du design system.',
   },
   {
-    club: 'First Startup FC',
-    role: 'Founding Engineer',
+    club: 'Première Startup FC',
+    role: 'Ingénieur Fondateur',
     period: '2012 - 2019',
-    notes: 'Wore every jersey number: backend, frontend, DevOps.',
+    notes: 'A porté tous les maillots : backend, frontend, DevOps.',
   },
 ]
 
 export function ExperiencePanel() {
   return (
     <div>
-      <span className="tag">Match History</span>
-      <h2>Experience</h2>
-      <p style={{ marginBottom: 18 }}>Work history across clubs — replace with your own timeline.</p>
+      <span className="tag">Historique des Matchs</span>
+      <h2>Expérience</h2>
+      <p style={{ marginBottom: 18 }}>Parcours professionnel entre les clubs — remplace par ta propre chronologie.</p>
       {EXPERIENCE.map((c) => (
         <div className="timeline-item" key={c.club}>
           <h3>

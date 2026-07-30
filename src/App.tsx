@@ -110,7 +110,7 @@ function App() {
       <div className="hud">
         <button
           className="hud-btn"
-          title="Info"
+          title="Infos"
           onClick={() => {
             playWhistle()
             setActivePanel('home')
@@ -120,14 +120,14 @@ function App() {
         </button>
         <button
           className={`hud-btn${muted ? '' : ' active'}`}
-          title={muted ? 'Unmute crowd noise' : 'Mute crowd noise'}
+          title={muted ? 'Activer le bruit de la foule' : 'Couper le bruit de la foule'}
           onClick={() => setMuted((m) => !m)}
         >
           {muted ? '🔇' : '🔊'}
         </button>
         <button
           className={`hud-btn${isNight ? ' active' : ''}`}
-          title="Toggle day / night match"
+          title="Basculer jour / nuit"
           onClick={() => setIsNight((n) => !n)}
         >
           {isNight ? '🌙' : '☀️'}
