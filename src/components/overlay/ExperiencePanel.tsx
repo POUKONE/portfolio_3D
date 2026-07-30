@@ -1,4 +1,4 @@
-const CAREER = [
+const EXPERIENCE = [
   {
     club: 'Current Club Inc.',
     role: 'Senior Architect',
@@ -19,13 +19,13 @@ const CAREER = [
   },
 ]
 
-export function CareerPanel() {
+export function ExperiencePanel() {
   return (
     <div>
       <span className="tag">Match History</span>
-      <h2>Career</h2>
-      <p style={{ marginBottom: 18 }}>Transfer history across clubs — replace with your own timeline.</p>
-      {CAREER.map((c) => (
+      <h2>Experience</h2>
+      <p style={{ marginBottom: 18 }}>Work history across clubs — replace with your own timeline.</p>
+      {EXPERIENCE.map((c) => (
         <div className="timeline-item" key={c.club}>
           <h3>
             {c.role} · {c.club}
