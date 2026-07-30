@@ -89,6 +89,7 @@ export function Scene({
     target: [number, number, number]
   } | null>(null)
   const pendingPanelRef = useRef<PanelKey>(null)
+  const pendingAnchorRef = useRef<[number, number, number] | null>(null)
   const controlsRef = useRef<OrbitControlsImpl>(null)
 
   useEffect(() => {
@@ -101,27 +102,33 @@ export function Scene({
   function selectPlayer(panel: PanelKey, position: [number, number, number]) {
     onWhistle()
     pendingPanelRef.current = panel
+    pendingAnchorRef.current = position
     setBallSpeed(DEFAULT_ROLL_SPEED)
     setBallTarget([position[0], BALL_RADIUS, position[2] + 0.55])
-    setSectionAnchor(position)
-    setCameraFocus(focusFromAnchor(position))
   }
 
   function selectGoal(position: [number, number, number]) {
     onWhistle()
     pendingPanelRef.current = 'contact'
+    pendingAnchorRef.current = position
     setBallSpeed(SHOT_SPEED)
     setBallTarget([position[0], BALL_RADIUS, position[2] + 1.4])
-    setSectionAnchor(position)
-    setCameraFocus(focusFromAnchor(position))
   }
 
   function handleBallArrived() {
     const panel = pendingPanelRef.current
+    const anchor = pendingAnchorRef.current
     if (panel) {
       if (panel === 'contact') onGoal()
+      // The camera only eases toward the section once the ball has actually
+      // arrived, instead of moving the instant the player/goal is clicked.
+      if (anchor) {
+        setSectionAnchor(anchor)
+        setCameraFocus(focusFromAnchor(anchor))
+      }
       onOpenPanel(panel)
       pendingPanelRef.current = null
+      pendingAnchorRef.current = null
     }
   }
 

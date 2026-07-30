@@ -25,6 +25,7 @@ export function Goal({ position, rotation = [0, 0, 0], onClick, hoverLabel }: Go
         interactive
           ? (e) => {
               e.stopPropagation()
+              setHovered(false)
               onClick?.()
             }
           : undefined
