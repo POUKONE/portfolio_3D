@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
 export const BALL_RADIUS = 0.22
-const ROLL_SPEED = 3.4 // units per second
+export const DEFAULT_ROLL_SPEED = 3.4 // units per second
 
 function useBallTexture() {
   return useMemo(() => {
@@ -50,9 +50,11 @@ function useBallTexture() {
  */
 export function Football({
   target,
+  speed = DEFAULT_ROLL_SPEED,
   onArrived,
 }: {
   target: [number, number, number]
+  speed?: number
   onArrived?: () => void
 }) {
   const texture = useBallTexture()
@@ -75,7 +77,7 @@ export function Football({
 
     if (dist > 0.01) {
       wasMoving.current = true
-      const step = Math.min(dist, ROLL_SPEED * delta)
+      const step = Math.min(dist, speed * delta)
       const move = targetPos.current.clone().sub(pos).normalize().multiplyScalar(step)
       pos.add(move)
 

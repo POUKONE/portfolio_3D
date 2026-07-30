@@ -6,17 +6,29 @@ import { Panel } from './components/overlay/Panel'
 import { HomePanel } from './components/overlay/HomePanel'
 import { CareerPanel } from './components/overlay/CareerPanel'
 import { ProjectsPanel } from './components/overlay/ProjectsPanel'
+import { ContactPanel } from './components/overlay/ContactPanel'
+import { Fireworks } from './components/overlay/Fireworks'
 import { TROPHY_CURSOR } from './cursor'
 
-export type PanelKey = 'home' | 'career' | 'projects' | null
+export type PanelKey = 'home' | 'career' | 'projects' | 'contact' | null
 
 function App() {
   const [entered, setEntered] = useState(false)
   const [muted, setMuted] = useState(true)
   const [isNight, setIsNight] = useState(false)
   const [activePanel, setActivePanel] = useState<PanelKey>(null)
+  const [fireworksKey, setFireworksKey] = useState(0)
+  const [showFireworks, setShowFireworks] = useState(false)
   const crowdAudioRef = useRef<HTMLAudioElement | null>(null)
   const whistleAudioRef = useRef<HTMLAudioElement | null>(null)
+  const fireworksTimeoutRef = useRef<number | null>(null)
+
+  function celebrateGoal() {
+    if (fireworksTimeoutRef.current) window.clearTimeout(fireworksTimeoutRef.current)
+    setFireworksKey((k) => k + 1)
+    setShowFireworks(true)
+    fireworksTimeoutRef.current = window.setTimeout(() => setShowFireworks(false), 1500)
+  }
 
   if (crowdAudioRef.current === null) {
     const audio = new Audio(`${import.meta.env.BASE_URL}audio/crowd.mp3`)
@@ -48,6 +60,7 @@ function App() {
     const audio = crowdAudioRef.current
     return () => {
       audio?.pause()
+      if (fireworksTimeoutRef.current) window.clearTimeout(fireworksTimeoutRef.current)
     }
   }, [])
 
@@ -70,7 +83,12 @@ function App() {
   return (
     <div className="experience" style={{ cursor: TROPHY_CURSOR }}>
       <div className="canvas-wrap">
-        <Scene isNight={isNight} onOpenPanel={setActivePanel} onWhistle={playWhistle} />
+        <Scene
+          isNight={isNight}
+          onOpenPanel={setActivePanel}
+          onWhistle={playWhistle}
+          onGoal={celebrateGoal}
+        />
       </div>
 
       <div className="hud">
@@ -105,8 +123,11 @@ function App() {
           {activePanel === 'home' && <HomePanel />}
           {activePanel === 'career' && <CareerPanel />}
           {activePanel === 'projects' && <ProjectsPanel />}
+          {activePanel === 'contact' && <ContactPanel />}
         </Panel>
       )}
+
+      {showFireworks && <Fireworks key={fireworksKey} />}
     </div>
   )
 }

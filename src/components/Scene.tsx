@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { Pitch, PITCH_LENGTH, PITCH_WIDTH } from './scene/Pitch'
 import { Goal } from './scene/Goal'
-import { Football, BALL_RADIUS } from './scene/Football'
+import { Football, BALL_RADIUS, DEFAULT_ROLL_SPEED } from './scene/Football'
 import { Stadium, STADIUM_HALF_LENGTH, STADIUM_HALF_WIDTH } from './scene/Stadium'
 import { Scoreboard } from './scene/Scoreboard'
 import { Lighting } from './scene/Lighting'
@@ -43,27 +43,42 @@ const FORMATION_3_1_2: {
 // Coach: inside the stadium bowl, on the touchline (not on the pitch itself)
 const COACH_POSITION: [number, number, number] = [-(PITCH_WIDTH / 2 + 2), 0, 6]
 
+const FAR_GOAL_POSITION: [number, number, number] = [0, 0, -PITCH_LENGTH / 2]
+const SHOT_SPEED = 11 // units per second — a struck shot on goal, faster than the normal roll
+
 export function Scene({
   isNight,
   onOpenPanel,
   onWhistle,
+  onGoal,
 }: {
   isNight: boolean
   onOpenPanel: (panel: PanelKey) => void
   onWhistle: () => void
+  onGoal: () => void
 }) {
   const [ballTarget, setBallTarget] = useState<[number, number, number]>([0, BALL_RADIUS, 0])
+  const [ballSpeed, setBallSpeed] = useState(DEFAULT_ROLL_SPEED)
   const pendingPanelRef = useRef<PanelKey>(null)
 
   function selectPlayer(panel: PanelKey, position: [number, number, number]) {
     onWhistle()
     pendingPanelRef.current = panel
+    setBallSpeed(DEFAULT_ROLL_SPEED)
     setBallTarget([position[0], BALL_RADIUS, position[2] + 0.55])
+  }
+
+  function selectGoal(position: [number, number, number]) {
+    onWhistle()
+    pendingPanelRef.current = 'contact'
+    setBallSpeed(SHOT_SPEED)
+    setBallTarget([position[0], BALL_RADIUS, position[2] + 1.4])
   }
 
   function handleBallArrived() {
     const panel = pendingPanelRef.current
     if (panel) {
+      if (panel === 'contact') onGoal()
       onOpenPanel(panel)
       pendingPanelRef.current = null
     }
@@ -76,9 +91,13 @@ export function Scene({
         <Pitch />
         <Stadium isNight={isNight} />
 
-        <Goal position={[0, 0, -PITCH_LENGTH / 2]} />
+        <Goal
+          position={FAR_GOAL_POSITION}
+          onClick={() => selectGoal(FAR_GOAL_POSITION)}
+          hoverLabel="Contact"
+        />
         <Goal position={[0, 0, PITCH_LENGTH / 2]} rotation={[0, Math.PI, 0]} />
-        <Football target={ballTarget} onArrived={handleBallArrived} />
+        <Football target={ballTarget} speed={ballSpeed} onArrived={handleBallArrived} />
 
         <Scoreboard position={[0, 8, -(STADIUM_HALF_LENGTH + 14)]} standHeight={8} />
 
