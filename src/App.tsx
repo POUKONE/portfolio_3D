@@ -11,6 +11,7 @@ import { CompetencesPanel } from './components/overlay/CompetencesPanel'
 import { InterestsPanel } from './components/overlay/InterestsPanel'
 import { LanguagesPanel } from './components/overlay/LanguagesPanel'
 import { ContactPanel } from './components/overlay/ContactPanel'
+import { HelpPanel } from './components/overlay/HelpPanel'
 import { Fireworks } from './components/overlay/Fireworks'
 import { TROPHY_CURSOR } from './cursor'
 
@@ -23,6 +24,7 @@ export type PanelKey =
   | 'interests'
   | 'languages'
   | 'contact'
+  | 'help'
   | null
 
 function App() {
@@ -142,6 +144,7 @@ function App() {
           {activePanel === 'interests' && <InterestsPanel />}
           {activePanel === 'languages' && <LanguagesPanel />}
           {activePanel === 'contact' && <ContactPanel />}
+          {activePanel === 'help' && <HelpPanel />}
         </Panel>
       )}
 
