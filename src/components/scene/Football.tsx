@@ -1,11 +1,10 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import type { Mesh } from 'three'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { Html } from '@react-three/drei'
-import { GlowRing } from './GlowRing'
 
 export const BALL_RADIUS = 0.22
+const ROLL_SPEED = 3.4 // units per second
 
 function useBallTexture() {
   return useMemo(() => {
@@ -44,52 +43,62 @@ function useBallTexture() {
   }, [])
 }
 
+/**
+ * A football that rolls toward `target` (e.g. a selected player) and calls
+ * `onArrived` once it settles, so the caller can reveal content only after
+ * the ball has visibly reached its destination.
+ */
 export function Football({
-  position,
-  onClick,
+  target,
+  onArrived,
 }: {
-  position: [number, number, number]
-  onClick: () => void
+  target: [number, number, number]
+  onArrived?: () => void
 }) {
   const texture = useBallTexture()
   const meshRef = useRef<Mesh>(null)
-  const [hovered, setHovered] = useState(false)
+  const currentPos = useRef(new THREE.Vector3(target[0], target[1], target[2]))
+  const targetPos = useRef(new THREE.Vector3(target[0], target[1], target[2]))
+  const wasMoving = useRef(false)
+  const upAxis = useRef(new THREE.Vector3(0, 1, 0))
+
+  useEffect(() => {
+    targetPos.current.set(target[0], target[1], target[2])
+  }, [target])
 
   useFrame((_, delta) => {
-    if (!meshRef.current) return
-    meshRef.current.rotation.y += delta * 0.6
-    meshRef.current.rotation.x += delta * 0.15
+    const mesh = meshRef.current
+    if (!mesh) return
+
+    const pos = currentPos.current
+    const dist = pos.distanceTo(targetPos.current)
+
+    if (dist > 0.01) {
+      wasMoving.current = true
+      const step = Math.min(dist, ROLL_SPEED * delta)
+      const move = targetPos.current.clone().sub(pos).normalize().multiplyScalar(step)
+      pos.add(move)
+
+      const axis = new THREE.Vector3().crossVectors(move, upAxis.current)
+      if (axis.lengthSq() > 1e-8) {
+        axis.normalize()
+        const angle = step / BALL_RADIUS
+        mesh.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(axis, angle))
+      }
+    } else if (wasMoving.current) {
+      wasMoving.current = false
+      onArrived?.()
+    } else {
+      mesh.rotation.y += delta * 0.25
+    }
+
+    mesh.position.copy(pos)
   })
 
   return (
-    <group position={position}>
-      <GlowRing radius={BALL_RADIUS * 2.3} color="#ffe066" position={[0, -BALL_RADIUS + 0.02, 0]} />
-      <mesh
-        ref={meshRef}
-        castShadow
-        onClick={(e) => {
-          e.stopPropagation()
-          onClick()
-        }}
-        onPointerOver={(e) => {
-          e.stopPropagation()
-          setHovered(true)
-          document.body.style.cursor = 'pointer'
-        }}
-        onPointerOut={() => {
-          setHovered(false)
-          document.body.style.cursor = 'auto'
-        }}
-        scale={hovered ? 1.15 : 1}
-      >
-        <sphereGeometry args={[BALL_RADIUS, 24, 24]} />
-        <meshStandardMaterial map={texture} roughness={0.5} />
-      </mesh>
-      {hovered && (
-        <Html position={[0, BALL_RADIUS * 2.2, 0]} center distanceFactor={12} occlude>
-          <div className="hotspot-label">Projects</div>
-        </Html>
-      )}
-    </group>
+    <mesh ref={meshRef} castShadow position={target}>
+      <sphereGeometry args={[BALL_RADIUS, 24, 24]} />
+      <meshStandardMaterial map={texture} roughness={0.5} />
+    </mesh>
   )
 }

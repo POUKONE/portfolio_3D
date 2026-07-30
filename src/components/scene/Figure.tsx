@@ -1,8 +1,9 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { Group } from 'three'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { Text } from '@react-three/drei'
+import { Html, Text } from '@react-three/drei'
+import { GlowRing } from './GlowRing'
 
 function useCrestTexture(initials: string) {
   return useMemo(() => {
@@ -98,6 +99,8 @@ export function Figure({
   sunglasses = false,
   crest = false,
   crestInitials = 'IP',
+  onClick,
+  hoverLabel,
 }: {
   position: [number, number, number]
   rotationY?: number
@@ -114,10 +117,14 @@ export function Figure({
   sunglasses?: boolean
   crest?: boolean
   crestInitials?: string
+  onClick?: () => void
+  hoverLabel?: string
 }) {
   const crestTexture = useCrestTexture(crestInitials)
   const groupRef = useRef<Group>(null)
   const phase = useRef(Math.random() * Math.PI * 2)
+  const [hovered, setHovered] = useState(false)
+  const interactive = typeof onClick === 'function'
 
   useFrame((state) => {
     if (!groupRef.current) return
@@ -126,8 +133,41 @@ export function Figure({
   })
 
   return (
-    <group ref={groupRef} position={position} rotation={[0, rotationY, 0]}>
-      <group scale={scale}>
+    <group
+      ref={groupRef}
+      position={position}
+      rotation={[0, rotationY, 0]}
+      onClick={
+        interactive
+          ? (e) => {
+              e.stopPropagation()
+              onClick?.()
+            }
+          : undefined
+      }
+      onPointerOver={
+        interactive
+          ? (e) => {
+              e.stopPropagation()
+              setHovered(true)
+            }
+          : undefined
+      }
+      onPointerOut={
+        interactive
+          ? () => {
+              setHovered(false)
+            }
+          : undefined
+      }
+    >
+      {interactive && <GlowRing radius={0.45} color="#8fcf9e" position={[0, 0.02, 0]} />}
+      {interactive && hovered && hoverLabel && (
+        <Html position={[0, 2.05, 0]} center distanceFactor={11} occlude>
+          <div className="hotspot-label">{hoverLabel}</div>
+        </Html>
+      )}
+      <group scale={scale * (interactive && hovered ? 1.05 : 1)}>
         {/* shoes */}
         <mesh castShadow position={[-0.115, 0.07, 0.03]} rotation={[Math.PI / 2, 0, 0]}>
           <capsuleGeometry args={[0.07, 0.1, 4, 8]} />

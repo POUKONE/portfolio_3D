@@ -101,15 +101,49 @@
 
 /* ---------- Hotspot labels ---------- */
 .hotspot-label {
+  position: relative;
   pointer-events: none;
   transform: translate(-50%, -100%);
-  background: rgba(10, 20, 12, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: var(--paper);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  background: linear-gradient(180deg, #1f7a34 0%, #123a20 100%);
+  border: 2.5px solid #ffd166;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 14px;
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   white-space: nowrap;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 209, 102, 0.2) inset,
+    0 2px 0 rgba(255, 255, 255, 0.15) inset;
+  animation: label-pop 0.18s ease;
+}
+
+.hotspot-label::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #ffd166;
+}
+
+@keyframes label-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
 }
 
 /* ---------- Side overlay panel ---------- */
