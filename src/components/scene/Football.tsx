@@ -66,6 +66,10 @@ export function Football({
 
   useEffect(() => {
     targetPos.current.set(target[0], target[1], target[2])
+    // A fresh selection always counts as "moving", even if the ball is
+    // already sitting on the new target — otherwise re-clicking the same
+    // hotspot twice in a row would never re-fire onArrived.
+    wasMoving.current = true
   }, [target])
 
   useFrame((_, delta) => {
