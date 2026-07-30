@@ -7,10 +7,10 @@ const CONTACT_LINKS = [
 export function ContactPanel() {
   return (
     <div>
-      <span className="tag">Goal!</span>
-      <h2>Get in touch</h2>
+      <span className="tag">But !</span>
+      <h2>Contacte-moi</h2>
       <p style={{ marginBottom: 18 }}>
-        That's a goal — replace these links with your own contact details.
+        C'est un but — remplace ces liens par tes propres coordonnées.
       </p>
       {CONTACT_LINKS.map((link) => (
         <div className="stat-row" key={link.label}>

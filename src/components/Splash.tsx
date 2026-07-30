@@ -6,13 +6,13 @@ export function Splash({ onEnter }: { onEnter: (muted: boolean) => void }) {
   return (
     <div className="splash">
       <h1>⚽ Ibrahima Poukone</h1>
-      <p className="subtitle">Data Lover — Home Ground</p>
+      <p className="subtitle">Passionné de Data — Terrain à domicile</p>
       <button className="kickoff-btn" onClick={() => onEnter(muted)}>
-        Kickoff ▸
+        Coup d'envoi ▸
       </button>
       <label className="mute-row">
         <input type="checkbox" checked={muted} onChange={(e) => setMuted(e.target.checked)} />
-        Mute Crowd Noise
+        Couper le bruit de la foule
       </label>
     </div>
   )

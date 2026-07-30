@@ -1,30 +1,30 @@
 const PROJECTS = [
   {
-    name: 'Project One',
-    status: 'Live',
+    name: 'Projet Un',
+    status: 'En ligne',
     tags: ['React', 'Node.js', 'Postgres'],
-    desc: 'Short description of the project and your role in it.',
+    desc: 'Courte description du projet et de ton rôle.',
   },
   {
-    name: 'Project Two',
-    status: 'Ongoing',
-    tags: ['AI', 'RAG', 'Python'],
-    desc: 'Short description of the project and your role in it.',
+    name: 'Projet Deux',
+    status: 'En cours',
+    tags: ['IA', 'RAG', 'Python'],
+    desc: 'Courte description du projet et de ton rôle.',
   },
   {
-    name: 'Project Three',
+    name: 'Projet Trois',
     status: 'Open Source',
     tags: ['TypeScript', 'CLI'],
-    desc: 'Short description of the project and your role in it.',
+    desc: 'Courte description du projet et de ton rôle.',
   },
 ]
 
 export function ProjectsPanel() {
   return (
     <div>
-      <span className="tag">Highlight Reel</span>
-      <h2>Projects</h2>
-      <p style={{ marginBottom: 18 }}>Your top plays — swap in your own project list.</p>
+      <span className="tag">Best-of</span>
+      <h2>Projets</h2>
+      <p style={{ marginBottom: 18 }}>Tes meilleures actions — remplace par ta propre liste de projets.</p>
       <div className="card-grid">
         {PROJECTS.map((p) => (
           <div className="project-card" key={p.name}>
