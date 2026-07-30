@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { Pitch, PITCH_LENGTH, PITCH_WIDTH } from './scene/Pitch'
@@ -23,15 +23,21 @@ const TEAM_KIT = {
   crestInitials: 'IP',
 }
 
-// 3-1-2 formation, entirely inside the lower half of the pitch (z > 0, closest to the default camera):
-// back three (4-5-2 numbering: 4, 5, 2), one holding midfielder (8), two forwards (10, 9)
-const FORMATION_3_1_2: { position: [number, number, number]; rotationY: number; number: number }[] = [
-  { position: [-7, 0, 12], rotationY: Math.PI - 0.3, number: 4 },
-  { position: [0, 0, 12], rotationY: Math.PI, number: 5 },
-  { position: [7, 0, 12], rotationY: Math.PI + 0.3, number: 2 },
-  { position: [0, 0, 7], rotationY: Math.PI, number: 8 },
-  { position: [-5, 0, 2], rotationY: Math.PI - 0.4, number: 10 },
-  { position: [5, 0, 2], rotationY: Math.PI + 0.4, number: 9 },
+// 3-1-2 formation, entirely inside the lower half of the pitch (z > 0, closest to the default camera).
+// Each player IS a section of the portfolio: back three -> Career, midfielder -> Home, forwards -> Projects.
+const FORMATION_3_1_2: {
+  position: [number, number, number]
+  rotationY: number
+  number: number
+  panel: PanelKey
+  label: string
+}[] = [
+  { position: [-7, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'career', label: 'Career' },
+  { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'career', label: 'Career' },
+  { position: [7, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'career', label: 'Career' },
+  { position: [0, 0, 7], rotationY: Math.PI, number: 8, panel: 'home', label: 'About Me' },
+  { position: [-5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projects' },
+  { position: [5, 0, 2], rotationY: Math.PI + 0.4, number: 9, panel: 'projects', label: 'Projects' },
 ]
 
 // Coach: inside the stadium bowl, on the touchline (not on the pitch itself)
@@ -40,10 +46,29 @@ const COACH_POSITION: [number, number, number] = [-(PITCH_WIDTH / 2 + 2), 0, 6]
 export function Scene({
   isNight,
   onOpenPanel,
+  onWhistle,
 }: {
   isNight: boolean
   onOpenPanel: (panel: PanelKey) => void
+  onWhistle: () => void
 }) {
+  const [ballTarget, setBallTarget] = useState<[number, number, number]>([0, BALL_RADIUS, 0])
+  const pendingPanelRef = useRef<PanelKey>(null)
+
+  function selectPlayer(panel: PanelKey, position: [number, number, number]) {
+    onWhistle()
+    pendingPanelRef.current = panel
+    setBallTarget([position[0], BALL_RADIUS, position[2] + 0.55])
+  }
+
+  function handleBallArrived() {
+    const panel = pendingPanelRef.current
+    if (panel) {
+      onOpenPanel(panel)
+      pendingPanelRef.current = null
+    }
+  }
+
   return (
     <Canvas shadows camera={{ position: [0, 14, 26], fov: 50 }}>
       <Suspense fallback={null}>
@@ -51,23 +76,22 @@ export function Scene({
         <Pitch />
         <Stadium isNight={isNight} />
 
-        <Goal position={[0, 0, -PITCH_LENGTH / 2]} onClick={() => onOpenPanel('career')} label="Career" />
-        <Goal
-          position={[0, 0, PITCH_LENGTH / 2]}
-          rotation={[0, Math.PI, 0]}
-          onClick={() => onOpenPanel('career')}
-          label="Career"
-        />
-        <Football position={[0, BALL_RADIUS, 0]} onClick={() => onOpenPanel('projects')} />
+        <Goal position={[0, 0, -PITCH_LENGTH / 2]} />
+        <Goal position={[0, 0, PITCH_LENGTH / 2]} rotation={[0, Math.PI, 0]} />
+        <Football target={ballTarget} onArrived={handleBallArrived} />
 
-        <Scoreboard
-          position={[0, 8, -(STADIUM_HALF_LENGTH + 14)]}
-          standHeight={8}
-          onClick={() => onOpenPanel('home')}
-        />
+        <Scoreboard position={[0, 8, -(STADIUM_HALF_LENGTH + 14)]} standHeight={8} />
 
         {FORMATION_3_1_2.map((p, i) => (
-          <Figure key={i} position={p.position} rotationY={p.rotationY} number={p.number} {...TEAM_KIT} />
+          <Figure
+            key={i}
+            position={p.position}
+            rotationY={p.rotationY}
+            number={p.number}
+            onClick={() => selectPlayer(p.panel, p.position)}
+            hoverLabel={p.label}
+            {...TEAM_KIT}
+          />
         ))}
 
         <Figure
