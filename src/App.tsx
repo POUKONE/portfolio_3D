@@ -98,6 +98,7 @@ function App() {
       <div className="canvas-wrap">
         <Scene
           isNight={isNight}
+          activePanel={activePanel}
           onOpenPanel={setActivePanel}
           onWhistle={playWhistle}
           onGoal={celebrateGoal}
