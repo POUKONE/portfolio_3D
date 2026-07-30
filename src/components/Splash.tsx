@@ -5,8 +5,8 @@ export function Splash({ onEnter }: { onEnter: (muted: boolean) => void }) {
 
   return (
     <div className="splash">
-      <h1>⚽ Your Name</h1>
-      <p className="subtitle">Full Stack Developer — Home Ground</p>
+      <h1>⚽ Ibrahima Poukone</h1>
+      <p className="subtitle">Data Lover — Home Ground</p>
       <button className="kickoff-btn" onClick={() => onEnter(muted)}>
         Kickoff ▸
       </button>

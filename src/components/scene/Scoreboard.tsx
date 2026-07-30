@@ -52,12 +52,13 @@ export function Scoreboard({
       </mesh>
       <Text
         position={[0, 0.6, 0.25]}
-        fontSize={0.55}
+        fontSize={0.42}
+        letterSpacing={0.02}
         color="#ffd166"
         anchorX="center"
         anchorY="middle"
       >
-        HOME
+        IBRAPKN FC
       </Text>
       <Text
         position={[0, -0.4, 0.25]}

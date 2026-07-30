@@ -2,16 +2,15 @@ export function HomePanel() {
   return (
     <div>
       <span className="tag">Starting XI</span>
-      <h2>Your Name</h2>
+      <h2>Ibrahima Poukone</h2>
       <p style={{ marginBottom: 18 }}>
-        Full Stack Developer &amp; Architect — playing every position from backend defense to
-        frontend attack. Replace this copy with your own TLDR, the same way a manager reads out
-        the matchday lineup.
+        Data Lover — playing every position from raw pipeline to polished dashboard. Replace
+        this copy with your own TLDR, the same way a manager reads out the matchday lineup.
       </p>
 
       <div className="stat-row">
         <span>Position</span>
-        <span>Full Stack / Architect</span>
+        <span>Data Lover</span>
       </div>
       <div className="stat-row">
         <span>Years in the league</span>
@@ -23,7 +22,7 @@ export function HomePanel() {
       </div>
       <div className="stat-row">
         <span>Club</span>
-        <span>Your Company</span>
+        <span>IbraPkn FC</span>
       </div>
 
       <p style={{ marginTop: 18 }}>
