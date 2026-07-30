@@ -186,6 +186,10 @@ export function Figure({
         interactive
           ? (e) => {
               e.stopPropagation()
+              // Hide the floating title immediately — once the camera eases
+              // in close for this section, the label would be oversized and
+              // poorly framed (and the panel shows the title anyway).
+              setHovered(false)
               onClick?.()
             }
           : undefined
