@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Splash } from './components/Splash'
 import { Scene } from './components/Scene'
@@ -14,6 +14,27 @@ function App() {
   const [muted, setMuted] = useState(true)
   const [isNight, setIsNight] = useState(false)
   const [activePanel, setActivePanel] = useState<PanelKey>(null)
+  const crowdAudioRef = useRef<HTMLAudioElement | null>(null)
+
+  if (crowdAudioRef.current === null) {
+    const audio = new Audio(`${import.meta.env.BASE_URL}audio/crowd.mp3`)
+    audio.loop = true
+    audio.volume = 0.35
+    crowdAudioRef.current = audio
+  }
+
+  useEffect(() => {
+    const audio = crowdAudioRef.current
+    if (!audio) return
+    audio.muted = muted
+  }, [muted])
+
+  useEffect(() => {
+    const audio = crowdAudioRef.current
+    return () => {
+      audio?.pause()
+    }
+  }, [])
 
   if (!entered) {
     return (
@@ -21,6 +42,11 @@ function App() {
         onEnter={(startMuted) => {
           setMuted(startMuted)
           setEntered(true)
+          const audio = crowdAudioRef.current
+          if (audio) {
+            audio.muted = startMuted
+            audio.play().catch(() => {})
+          }
         }}
       />
     )
