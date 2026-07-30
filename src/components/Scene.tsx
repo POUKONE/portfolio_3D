@@ -32,12 +32,12 @@ const FORMATION_3_1_2: {
   panel: PanelKey
   label: string
 }[] = [
-  { position: [-7, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'career', label: 'Career' },
+  { position: [-9, 0, 12], rotationY: Math.PI - 0.3, number: 4, panel: 'career', label: 'Career' },
   { position: [0, 0, 12], rotationY: Math.PI, number: 5, panel: 'career', label: 'Career' },
-  { position: [7, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'career', label: 'Career' },
+  { position: [9, 0, 12], rotationY: Math.PI + 0.3, number: 2, panel: 'career', label: 'Career' },
   { position: [0, 0, 7], rotationY: Math.PI, number: 8, panel: 'home', label: 'About Me' },
-  { position: [-5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projects' },
-  { position: [5, 0, 2], rotationY: Math.PI + 0.4, number: 9, panel: 'projects', label: 'Projects' },
+  { position: [-6.5, 0, 2], rotationY: Math.PI - 0.4, number: 10, panel: 'projects', label: 'Projects' },
+  { position: [6.5, 0, 2], rotationY: Math.PI + 0.4, number: 9, panel: 'projects', label: 'Projects' },
 ]
 
 // Coach: inside the stadium bowl, on the touchline (not on the pitch itself)
