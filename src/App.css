@@ -27,8 +27,8 @@
 
 .splash h1 {
   font-family: var(--display);
-  font-size: clamp(2rem, 6vw, 3.6rem);
-  letter-spacing: -1px;
+  font-size: clamp(2.6rem, 7.5vw, 4.6rem);
+  letter-spacing: 3px;
   margin: 0;
   color: var(--paper);
   text-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
@@ -52,7 +52,7 @@
     radial-gradient(circle at 8% 88%, #000 0 7px, transparent 8px),
     radial-gradient(circle at 50% 95%, #000 0 8px, transparent 9px),
     #fff;
-  background-size: 64px 64px;
+  background-size: 78px 78px;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -72,7 +72,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 2.4rem;
+  font-size: 3.4rem;
   line-height: 1;
   pointer-events: none;
   will-change: transform;
