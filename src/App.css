@@ -34,10 +34,50 @@
   text-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
 }
 
+/* Name rendered as a football's surface: white base, black patches, clipped
+   to the letter shapes so it reads as text first and ball texture second.
+   Selector is scoped via .splash to out-specificity the plain `.splash h1`
+   color rule above instead of relying on !important. */
+.splash .name-football {
+  position: relative;
+  z-index: 2;
+  font-variant-numeric: tabular-nums;
+  background:
+    radial-gradient(circle at 12% 22%, #000 0 9px, transparent 10px),
+    radial-gradient(circle at 46% 8%, #000 0 7px, transparent 8px),
+    radial-gradient(circle at 78% 28%, #000 0 10px, transparent 11px),
+    radial-gradient(circle at 30% 62%, #000 0 8px, transparent 9px),
+    radial-gradient(circle at 62% 55%, #000 0 6px, transparent 7px),
+    radial-gradient(circle at 90% 75%, #000 0 9px, transparent 10px),
+    radial-gradient(circle at 8% 88%, #000 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 95%, #000 0 8px, transparent 9px),
+    #fff;
+  background-size: 64px 64px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: none;
+}
+
 .splash .subtitle {
   color: #b7d9c2;
   margin: 0 0 12px;
   font-size: 1.05rem;
+  position: relative;
+  z-index: 2;
+}
+
+.splash-ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 2.4rem;
+  line-height: 1;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.45));
+  z-index: 1;
 }
 
 .kickoff-btn {
