@@ -14,6 +14,7 @@ import { ContactPanel } from './components/overlay/ContactPanel'
 import { HelpPanel } from './components/overlay/HelpPanel'
 import { Fireworks } from './components/overlay/Fireworks'
 import { TROPHY_CURSOR } from './cursor'
+import { playKickoffFanfare } from './audio/fanfare'
 
 export type PanelKey =
   | 'home'
@@ -90,6 +91,7 @@ function App() {
             audio.muted = startMuted
             audio.play().catch(() => {})
           }
+          if (!startMuted) playKickoffFanfare()
         }}
       />
     )
