@@ -1,7 +1,13 @@
 const SKILL_GROUPS = [
-  { name: 'Langages & Frameworks', tags: ['TypeScript', 'Python', 'React'] },
-  { name: 'Data & Infra', tags: ['SQL', 'Airflow', 'Docker'] },
-  { name: 'Savoir-être', tags: ['Leadership', 'Communication'] },
+  {
+    name: 'Data & Analyse',
+    tags: ['Power BI', 'Python', 'R', 'SQL', 'PostgreSQL', 'ETL', 'Scikit-learn', 'Matplotlib', 'Seaborn'],
+  },
+  { name: 'Développement Web', tags: ['HTML', 'CSS', 'JavaScript', 'PHP'] },
+  {
+    name: 'Outils & Techno',
+    tags: ['Git', 'VS Code', 'STM32', 'Tinkercad', 'Matlab', 'Microsoft Office', 'WordPress', 'Hostinger', 'Zapier'],
+  },
 ]
 
 export function CompetencesPanel() {

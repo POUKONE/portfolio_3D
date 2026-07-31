@@ -1,15 +1,21 @@
 const FORMATION = [
   {
-    school: 'Nom de l’Université',
-    degree: 'Master en Quelque Chose',
-    period: '2010 - 2012',
-    notes: 'Diplômé du centre de formation — remplace par tes propres qualifications.',
+    school: 'ECAM EPMI, Cergy-Pontoise, France',
+    degree: 'Bac +4 Convergence Énergie & Data',
+    period: '2024 - Aujourd’hui',
+    notes: 'Formation en alternance alliant ingénierie énergétique et sciences des données.',
   },
   {
-    school: 'Autre Établissement',
-    degree: 'Licence en Quelque Chose',
-    period: '2007 - 2010',
-    notes: 'Là où les bases ont été acquises.',
+    school: 'Prépa Saint Jean, Douala, Cameroun',
+    degree: 'Cycle Préparatoire',
+    period: '2022 - 2024',
+    notes: 'Classe préparatoire aux grandes écoles d’ingénieurs.',
+  },
+  {
+    school: 'Siantou, Yaoundé, Cameroun',
+    degree: 'BTS +1 Informatique',
+    period: '2021 - 2022',
+    notes: 'Première année de BTS en informatique.',
   },
 ]
 
@@ -18,7 +24,7 @@ export function FormationPanel() {
     <div>
       <span className="tag">Centre de Formation</span>
       <h2>Formation</h2>
-      <p style={{ marginBottom: 18 }}>Centre de formation et apprentissage — remplace par ton propre parcours scolaire.</p>
+      <p style={{ marginBottom: 18 }}>Mon parcours académique, du Cameroun à la France.</p>
       {FORMATION.map((f) => (
         <div className="timeline-item" key={f.school}>
           <h3>
