@@ -36,6 +36,7 @@ function App() {
   const [fireworksKey, setFireworksKey] = useState(0)
   const [showFireworks, setShowFireworks] = useState(false)
   const whistleAudioRef = useRef<HTMLAudioElement | null>(null)
+  const localAnthemRef = useRef<HTMLAudioElement | null>(null)
   const fireworksTimeoutRef = useRef<number | null>(null)
 
   function celebrateGoal() {
@@ -51,11 +52,30 @@ function App() {
     whistleAudioRef.current = audio
   }
 
+  // Only present on a developer's own machine (git-ignored, never part of the
+  // public deploy) — see public/audio and .gitignore. Falls back to the
+  // synthesised fanfare when this file isn't there, e.g. on the live site.
+  if (localAnthemRef.current === null) {
+    const audio = new Audio(`${import.meta.env.BASE_URL}audio/kickoff-anthem.local.mp3`)
+    audio.volume = 0.6
+    localAnthemRef.current = audio
+  }
+
   function playWhistle() {
     const audio = whistleAudioRef.current
     if (!audio || muted) return
     audio.currentTime = 0
     audio.play().catch(() => {})
+  }
+
+  function playKickoffSound() {
+    const audio = localAnthemRef.current
+    if (!audio) {
+      playKickoffFanfare()
+      return
+    }
+    audio.currentTime = 0
+    audio.play().catch(() => playKickoffFanfare())
   }
 
   useEffect(() => {
@@ -70,7 +90,7 @@ function App() {
         onEnter={(startMuted) => {
           setMuted(startMuted)
           setEntered(true)
-          if (!startMuted) playKickoffFanfare()
+          if (!startMuted) playKickoffSound()
         }}
       />
     )
