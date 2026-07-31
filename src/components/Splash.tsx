@@ -47,7 +47,7 @@ function useBouncingBall(containerRef: React.RefObject<HTMLDivElement | null>) {
     const ball = ballRef.current
     if (!container || !ball) return
 
-    const size = 48
+    const size = 68
     let width = container.clientWidth
     let height = container.clientHeight
     let x = width / 2 - size / 2
