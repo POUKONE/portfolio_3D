@@ -132,7 +132,7 @@ export function Splash({ onEnter }: { onEnter: (muted: boolean) => void }) {
       </button>
       <label className="mute-row">
         <input type="checkbox" checked={muted} onChange={(e) => setMuted(e.target.checked)} />
-        Couper le bruit de la foule
+        Couper le son
       </label>
     </div>
   )

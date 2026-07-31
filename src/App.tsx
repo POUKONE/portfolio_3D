@@ -35,7 +35,6 @@ function App() {
   const [activePanel, setActivePanel] = useState<PanelKey>(null)
   const [fireworksKey, setFireworksKey] = useState(0)
   const [showFireworks, setShowFireworks] = useState(false)
-  const crowdAudioRef = useRef<HTMLAudioElement | null>(null)
   const whistleAudioRef = useRef<HTMLAudioElement | null>(null)
   const fireworksTimeoutRef = useRef<number | null>(null)
 
@@ -44,13 +43,6 @@ function App() {
     setFireworksKey((k) => k + 1)
     setShowFireworks(true)
     fireworksTimeoutRef.current = window.setTimeout(() => setShowFireworks(false), 1500)
-  }
-
-  if (crowdAudioRef.current === null) {
-    const audio = new Audio(`${import.meta.env.BASE_URL}audio/crowd.mp3`)
-    audio.loop = true
-    audio.volume = 0.35
-    crowdAudioRef.current = audio
   }
 
   if (whistleAudioRef.current === null) {
@@ -67,15 +59,7 @@ function App() {
   }
 
   useEffect(() => {
-    const audio = crowdAudioRef.current
-    if (!audio) return
-    audio.muted = muted
-  }, [muted])
-
-  useEffect(() => {
-    const audio = crowdAudioRef.current
     return () => {
-      audio?.pause()
       if (fireworksTimeoutRef.current) window.clearTimeout(fireworksTimeoutRef.current)
     }
   }, [])
@@ -86,11 +70,6 @@ function App() {
         onEnter={(startMuted) => {
           setMuted(startMuted)
           setEntered(true)
-          const audio = crowdAudioRef.current
-          if (audio) {
-            audio.muted = startMuted
-            audio.play().catch(() => {})
-          }
           if (!startMuted) playKickoffFanfare()
         }}
       />
@@ -122,7 +101,7 @@ function App() {
         </button>
         <button
           className={`hud-btn${muted ? '' : ' active'}`}
-          title={muted ? 'Activer le bruit de la foule' : 'Couper le bruit de la foule'}
+          title={muted ? 'Activer le son' : 'Couper le son'}
           onClick={() => setMuted((m) => !m)}
         >
           {muted ? '🔇' : '🔊'}
