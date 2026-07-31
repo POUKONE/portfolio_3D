@@ -484,7 +484,7 @@ export function SectionShowcase({ theme, position }: { theme: PanelKey; position
     const scale = Math.max(0, easeOutBack(t))
     scaleGroup.scale.setScalar(scale)
 
-    group.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.4 + phase.current) * 0.05
+    group.position.y = Math.sin(state.clock.elapsedTime * 1.4 + phase.current) * 0.05
     group.rotation.y = state.clock.elapsedTime * 0.35
   })
 
