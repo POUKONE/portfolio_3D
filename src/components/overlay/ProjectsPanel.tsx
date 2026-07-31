@@ -1,21 +1,24 @@
 const PROJECTS = [
   {
+    number: '01',
     name: 'Projet Un',
     status: 'En ligne',
-    tags: ['React', 'Node.js', 'Postgres'],
     desc: 'Courte description du projet et de ton rôle.',
+    link: '#',
   },
   {
+    number: '02',
     name: 'Projet Deux',
     status: 'En cours',
-    tags: ['IA', 'RAG', 'Python'],
     desc: 'Courte description du projet et de ton rôle.',
+    link: '#',
   },
   {
+    number: '03',
     name: 'Projet Trois',
     status: 'Open Source',
-    tags: ['TypeScript', 'CLI'],
     desc: 'Courte description du projet et de ton rôle.',
+    link: '#',
   },
 ]
 
@@ -28,17 +31,17 @@ export function ProjectsPanel() {
       <div className="card-grid">
         {PROJECTS.map((p) => (
           <div className="project-card" key={p.name}>
+            <div className="project-photo">
+              <span className="project-photo-number">{p.number}</span>
+              <span className="project-photo-icon">⚽</span>
+            </div>
             <h3>
               {p.name} <span style={{ color: '#8fcf9e', fontSize: '0.75rem' }}>· {p.status}</span>
             </h3>
             <p>{p.desc}</p>
-            <div className="badges">
-              {p.tags.map((t) => (
-                <span className="badge" key={t}>
-                  {t}
-                </span>
-              ))}
-            </div>
+            <a className="project-link" href={p.link} target="_blank" rel="noreferrer">
+              Voir le projet ▸
+            </a>
           </div>
         ))}
       </div>

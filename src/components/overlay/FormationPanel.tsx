@@ -27,10 +27,9 @@ export function FormationPanel() {
       <p style={{ marginBottom: 18 }}>Mon parcours académique, du Cameroun à la France.</p>
       {FORMATION.map((f) => (
         <div className="timeline-item" key={f.school}>
-          <h3>
-            {f.degree} · {f.school}
-          </h3>
           <span className="period">{f.period}</span>
+          <h3>{f.school}</h3>
+          <p className="role-label">{f.degree}</p>
           <p>{f.notes}</p>
         </div>
       ))}
