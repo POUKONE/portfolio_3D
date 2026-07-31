@@ -1,25 +1,26 @@
 export function HomePanel() {
   return (
     <div>
-      <span className="tag">Titulaire</span>
+      <span className="tag">Alternance 2025</span>
       <h2>Ibrahima Poukone</h2>
       <p style={{ marginBottom: 18 }}>
-        Passionné de data — je joue à tous les postes, du pipeline brut au tableau de bord
-        soigné. Remplace ce texte par ton propre résumé, comme un manager annonce la
-        composition avant le match.
+        Doté de 2 années d'expérience dans le domaine de la data, je mets mon expertise —
+        acquise au sein de plusieurs entreprises — au service d'un poste en alternance. Ma
+        maîtrise des notions et outils de la data science, ainsi que mon engagement, sont mes
+        principaux atouts.
       </p>
 
       <div className="stat-row">
         <span>Poste</span>
-        <span>Passionné de Data</span>
+        <span>Convergence Énergie & Data</span>
       </div>
       <div className="stat-row">
-        <span>Années dans le métier</span>
-        <span>10+</span>
+        <span>Années d'expérience</span>
+        <span>2+</span>
       </div>
       <div className="stat-row">
         <span>Coup de signature</span>
-        <span>Transformer les prototypes en production</span>
+        <span>Des dashboards Power BI (+25% de clarté)</span>
       </div>
       <div className="stat-row">
         <span>Club</span>

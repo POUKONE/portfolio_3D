@@ -1,7 +1,8 @@
-const CONTACT_LINKS = [
-  { label: 'Email', value: 'you@example.com', href: 'mailto:you@example.com' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/you', href: 'https://linkedin.com/in/you' },
-  { label: 'GitHub', value: 'github.com/you', href: 'https://github.com/you' },
+const CONTACT_LINKS: { label: string; value: string; href?: string }[] = [
+  { label: 'Email', value: 'ibrahimapoukone@gmail.com', href: 'mailto:ibrahimapoukone@gmail.com' },
+  { label: 'Téléphone', value: '+33 7 59 86 87 22', href: 'tel:+33759868722' },
+  { label: 'LinkedIn', value: 'Ibrahima Poukone' },
+  { label: 'Localisation', value: 'Paris, France' },
 ]
 
 export function ContactPanel() {
@@ -9,15 +10,17 @@ export function ContactPanel() {
     <div>
       <span className="tag">But !</span>
       <h2>Contacte-moi</h2>
-      <p style={{ marginBottom: 18 }}>
-        C'est un but — remplace ces liens par tes propres coordonnées.
-      </p>
+      <p style={{ marginBottom: 18 }}>N'hésite pas à me contacter pour une alternance ou un projet.</p>
       {CONTACT_LINKS.map((link) => (
         <div className="stat-row" key={link.label}>
           <span>{link.label}</span>
-          <a href={link.href} target="_blank" rel="noreferrer">
-            {link.value}
-          </a>
+          {link.href ? (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              {link.value}
+            </a>
+          ) : (
+            <span>{link.value}</span>
+          )}
         </div>
       ))}
     </div>

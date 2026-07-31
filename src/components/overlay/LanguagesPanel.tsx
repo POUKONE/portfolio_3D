@@ -1,7 +1,7 @@
 const LANGUAGES = [
-  { name: 'Français', level: 'Natif' },
-  { name: 'Anglais', level: 'Courant' },
-  { name: 'Espagnol', level: 'Conversationnel' },
+  { name: 'Français', level: 'Langue maternelle' },
+  { name: 'Anglais', level: 'Pratiqué' },
+  { name: 'Allemand', level: 'Pratiqué' },
 ]
 
 export function LanguagesPanel() {
@@ -9,7 +9,7 @@ export function LanguagesPanel() {
     <div>
       <span className="tag">Feuille de Match</span>
       <h2>Langues</h2>
-      <p style={{ marginBottom: 18 }}>Langues parlées — remplace par les tiennes.</p>
+      <p style={{ marginBottom: 18 }}>Les langues que je parle.</p>
       {LANGUAGES.map((l) => (
         <div className="stat-row" key={l.name}>
           <span>{l.name}</span>

@@ -1,4 +1,4 @@
-const INTERESTS = ['Foot à 5', 'Échecs', 'Photographie', 'Randonnée']
+const INTERESTS = ['Football (AS AFC Clamart)', 'Otaku', 'Musique']
 
 export function InterestsPanel() {
   return (
