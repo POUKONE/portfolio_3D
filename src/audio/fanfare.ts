@@ -46,6 +46,6 @@ export function playKickoffFanfare(volume = 0.5) {
 
     window.setTimeout(() => ctx.close(), 2000)
   } catch {
-    // Web Audio unavailable — the crowd loop still plays, this is just a flourish.
+    // Web Audio unavailable — fail silently, this is just a flourish.
   }
 }
