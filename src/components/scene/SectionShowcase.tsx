@@ -1,8 +1,9 @@
 import { useMemo, useRef } from 'react'
-import type { Group } from 'three'
+import type { Group, Mesh } from 'three'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
+import { GlowRing } from './GlowRing'
 import type { PanelKey } from '../../App'
 
 const THEMED_PANEL_KEYS = new Set<PanelKey>([
@@ -16,6 +17,14 @@ const THEMED_PANEL_KEYS = new Set<PanelKey>([
 
 export function isThemedShowcaseKey(panel: PanelKey): boolean {
   return THEMED_PANEL_KEYS.has(panel)
+}
+
+// Standard "ease out back" — overshoots past 1 then settles, giving the
+// showcase's entrance a bit of stadium-reveal bounce instead of a flat fade.
+function easeOutBack(t: number) {
+  const c1 = 1.70158
+  const c3 = c1 + 1
+  return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2)
 }
 
 // A stylised, original shield badge — colours evoke a league without
@@ -214,9 +223,20 @@ function MiniCup({ color = '#ffd166', scale = 1 }: { color?: string; scale?: num
   )
 }
 
-// Formation: a miniature training-academy pitch with mini goals and cones.
+// Formation: a miniature training-academy pitch with mini goals, cones, and
+// a ball rolling back and forth between the two ends like a passing drill.
 function FormationShowcase() {
   const pitchTexture = useMiniPitchTexture()
+  const ballRef = useRef<Mesh>(null)
+
+  useFrame((state) => {
+    const ball = ballRef.current
+    if (!ball) return
+    const t = state.clock.elapsedTime
+    ball.position.z = Math.sin(t * 1.1) * 0.42
+    ball.rotation.x = t * 3.2
+  })
+
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -237,25 +257,46 @@ function FormationShowcase() {
           <meshStandardMaterial color="#ff7a1a" />
         </mesh>
       ))}
+      <mesh ref={ballRef} position={[0, 0.035, 0]} castShadow>
+        <sphereGeometry args={[0.035, 10, 10]} />
+        <meshStandardMaterial color="white" roughness={0.4} />
+      </mesh>
     </group>
   )
 }
 
-// Experience: a row of season trophies on a small plinth.
+// Experience: a row of season trophies on a small plinth, each bobbing on
+// its own beat like a podium presentation.
 function ExperienceShowcase() {
   const seasons = [
     { label: '19-22', x: -0.4, scale: 0.85 },
     { label: '22-23', x: 0, scale: 1.15 },
     { label: '23-25', x: 0.4, scale: 0.85 },
   ]
+  const groupRefs = useRef<(Group | null)[]>([])
+
+  useFrame((state) => {
+    seasons.forEach((_, i) => {
+      const g = groupRefs.current[i]
+      if (!g) return
+      g.position.y = 0.04 + Math.sin(state.clock.elapsedTime * 2 + i * 1.7) * 0.025
+    })
+  })
+
   return (
     <group>
       <mesh position={[0, 0.02, 0]}>
         <boxGeometry args={[1.05, 0.04, 0.3]} />
         <meshStandardMaterial color="#1c1f26" />
       </mesh>
-      {seasons.map((s) => (
-        <group key={s.label} position={[s.x, 0.04, 0]}>
+      {seasons.map((s, i) => (
+        <group
+          key={s.label}
+          position={[s.x, 0.04, 0]}
+          ref={(el) => {
+            groupRefs.current[i] = el
+          }}
+        >
           <MiniCup scale={s.scale} />
           <Text position={[0, -0.06, 0.18]} fontSize={0.055} color="#ffd166" anchorX="center" anchorY="middle">
             {s.label}
@@ -266,11 +307,19 @@ function ExperienceShowcase() {
   )
 }
 
-// Compétences: a coach's tactics board on an easel.
+// Compétences: a coach's tactics board on an easel, tilting gently as if
+// being talked through in a team meeting.
 function CompetencesShowcase() {
   const texture = useTacticsBoardTexture()
+  const groupRef = useRef<Group>(null)
+
+  useFrame((state) => {
+    if (!groupRef.current) return
+    groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 1.3) * 0.05
+  })
+
   return (
-    <group>
+    <group ref={groupRef}>
       <mesh position={[0, 0.45, -0.015]}>
         <boxGeometry args={[0.96, 0.74, 0.02]} />
         <meshStandardMaterial color="#3a2a18" />
@@ -291,12 +340,22 @@ function CompetencesShowcase() {
   )
 }
 
-// Intérêts & Loisirs: a small cluster of hobby icons — football, chess,
-// camera, mountain (hiking).
+// Intérêts & Loisirs: a small cluster of hobby icons — football (bouncing),
+// chess, camera, mountain (hiking).
 function InterestsShowcase() {
+  const ballRef = useRef<Mesh>(null)
+
+  useFrame((state) => {
+    const ball = ballRef.current
+    if (!ball) return
+    const t = state.clock.elapsedTime
+    ball.position.y = 0.09 + Math.abs(Math.sin(t * 2.6)) * 0.06
+    ball.rotation.z = t * 4
+  })
+
   return (
     <group>
-      <mesh position={[-0.5, 0.09, 0]} castShadow>
+      <mesh ref={ballRef} position={[-0.5, 0.09, 0]} castShadow>
         <sphereGeometry args={[0.09, 14, 14]} />
         <meshStandardMaterial color="#f2f4f2" roughness={0.5} />
       </mesh>
@@ -332,12 +391,21 @@ function InterestsShowcase() {
   )
 }
 
-// Projets: a glowing highlight-reel jumbotron screen.
+// Projets: a glowing highlight-reel jumbotron screen, pulsing gently like a
+// live broadcast.
 function ProjectsShowcase() {
   const texture = useHighlightScreenTexture()
+  const screenRef = useRef<Mesh>(null)
+
+  useFrame((state) => {
+    if (!screenRef.current) return
+    const pulse = 1 + Math.sin(state.clock.elapsedTime * 2.2) * 0.04
+    screenRef.current.scale.set(pulse, pulse, 1)
+  })
+
   return (
     <group>
-      <mesh position={[0, 0.5, 0]}>
+      <mesh ref={screenRef} position={[0, 0.5, 0]}>
         <planeGeometry args={[1, 0.62]} />
         <meshBasicMaterial map={texture} toneMapped={false} side={THREE.DoubleSide} />
       </mesh>
@@ -354,7 +422,8 @@ function ProjectsShowcase() {
 }
 
 // Langues: original stylised badges evoking Ligue 1, the Premier League and
-// the Bundesliga by colour, not by reproducing any real crest.
+// the Bundesliga by colour, not by reproducing any real crest — each bobs on
+// its own beat like a medal ceremony.
 function LanguagesShowcase() {
   const ligue1 = useShieldTexture('L1', ['#0055a4', '#ffffff', '#ef4135'], 'vertical')
   const premierLeague = useShieldTexture('PL', ['#3d1152', '#8a2be2'], 'vertical')
@@ -364,10 +433,26 @@ function LanguagesShowcase() {
     { texture: premierLeague, x: 0 },
     { texture: bundesliga, x: 0.45 },
   ]
+  const meshRefs = useRef<(Mesh | null)[]>([])
+
+  useFrame((state) => {
+    badges.forEach((_, i) => {
+      const m = meshRefs.current[i]
+      if (!m) return
+      m.position.y = 0.35 + Math.sin(state.clock.elapsedTime * 1.9 + i * 1.3) * 0.035
+    })
+  })
+
   return (
     <group>
       {badges.map((b, i) => (
-        <mesh key={i} position={[b.x, 0.35, 0]}>
+        <mesh
+          key={i}
+          position={[b.x, 0.35, 0]}
+          ref={(el) => {
+            meshRefs.current[i] = el
+          }}
+        >
           <planeGeometry args={[0.32, 0.4]} />
           <meshBasicMaterial map={b.texture} transparent toneMapped={false} side={THREE.DoubleSide} />
         </mesh>
@@ -379,15 +464,26 @@ function LanguagesShowcase() {
 /**
  * A small procedural 3D "vignette" that floats above the clicked hotspot,
  * themed to the section whose panel is open — a visual complement to the
- * HTML panel, not a replacement for it.
+ * HTML panel, not a replacement for it. Eases in with a stadium-reveal
+ * bounce and sits under a soft spotlight rather than just fading in flat.
  */
 export function SectionShowcase({ theme, position }: { theme: PanelKey; position: [number, number, number] }) {
   const groupRef = useRef<Group>(null)
+  const scaleRef = useRef<Group>(null)
   const phase = useRef(Math.random() * Math.PI * 2)
+  const mountTime = useRef<number | null>(null)
 
   useFrame((state) => {
     const group = groupRef.current
-    if (!group) return
+    const scaleGroup = scaleRef.current
+    if (!group || !scaleGroup) return
+
+    if (mountTime.current === null) mountTime.current = state.clock.elapsedTime
+    const age = state.clock.elapsedTime - mountTime.current
+    const t = Math.min(age / 0.5, 1)
+    const scale = Math.max(0, easeOutBack(t))
+    scaleGroup.scale.setScalar(scale)
+
     group.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.4 + phase.current) * 0.05
     group.rotation.y = state.clock.elapsedTime * 0.35
   })
@@ -395,13 +491,27 @@ export function SectionShowcase({ theme, position }: { theme: PanelKey; position
   if (!isThemedShowcaseKey(theme)) return null
 
   return (
-    <group ref={groupRef} position={position}>
-      {theme === 'formation' && <FormationShowcase />}
-      {theme === 'experience' && <ExperienceShowcase />}
-      {theme === 'competences' && <CompetencesShowcase />}
-      {theme === 'interests' && <InterestsShowcase />}
-      {theme === 'projects' && <ProjectsShowcase />}
-      {theme === 'languages' && <LanguagesShowcase />}
+    <group position={position}>
+      <spotLight
+        position={[0, 3.2, 0]}
+        target-position={[0, 0, 0]}
+        angle={0.5}
+        penumbra={0.6}
+        intensity={18}
+        distance={5}
+        color="#fff4d6"
+      />
+      <GlowRing radius={0.85} color="#ffd447" position={[0, -2.18, 0]} />
+      <group ref={groupRef}>
+        <group ref={scaleRef}>
+          {theme === 'formation' && <FormationShowcase />}
+          {theme === 'experience' && <ExperienceShowcase />}
+          {theme === 'competences' && <CompetencesShowcase />}
+          {theme === 'interests' && <InterestsShowcase />}
+          {theme === 'projects' && <ProjectsShowcase />}
+          {theme === 'languages' && <LanguagesShowcase />}
+        </group>
+      </group>
     </group>
   )
 }
