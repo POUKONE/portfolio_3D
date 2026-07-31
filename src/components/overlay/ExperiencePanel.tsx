@@ -37,10 +37,9 @@ export function ExperiencePanel() {
       <p style={{ marginBottom: 18 }}>Mon parcours professionnel, saison après saison.</p>
       {EXPERIENCE.map((c) => (
         <div className="timeline-item" key={c.club}>
-          <h3>
-            {c.role} · {c.club}
-          </h3>
           <span className="period">{c.period}</span>
+          <h3>{c.club}</h3>
+          <p className="role-label">{c.role}</p>
           <p>{c.notes}</p>
         </div>
       ))}
