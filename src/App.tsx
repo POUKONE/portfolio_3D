@@ -69,13 +69,25 @@ function App() {
   }
 
   function playKickoffSound() {
+    // Decided synchronously (no awaiting a play()/catch() round trip) so a
+    // fallback to the synthesised fanfare still runs inside the same user
+    // gesture as the click — otherwise the AudioContext it creates starts
+    // suspended and produces silence with no error. The local file's
+    // load/error state is already settled well before kickoff is clicked,
+    // since the browser starts fetching it as soon as the Audio object is
+    // constructed, long before this handler runs.
     const audio = localAnthemRef.current
-    if (!audio) {
+    if (audio === null || audio.error !== null || audio.networkState === audio.NETWORK_NO_SOURCE) {
       playKickoffFanfare()
       return
     }
-    audio.currentTime = 0
-    audio.play().catch(() => playKickoffFanfare())
+
+    try {
+      audio.currentTime = 0
+    } catch {
+      // ignore — some browsers reject a seek before metadata is ready
+    }
+    audio.play().catch(() => {})
   }
 
   useEffect(() => {
