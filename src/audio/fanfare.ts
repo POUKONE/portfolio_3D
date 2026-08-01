@@ -6,6 +6,7 @@ export function playKickoffFanfare(volume = 0.5) {
     const AudioContextCtor =
       window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
     const ctx = new AudioContextCtor()
+    if (ctx.state === 'suspended') ctx.resume()
     const master = ctx.createGain()
     master.gain.value = volume
     master.connect(ctx.destination)
