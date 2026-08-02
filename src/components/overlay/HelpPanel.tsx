@@ -14,7 +14,7 @@ export function HelpPanel() {
       </div>
       <div className="stat-row">
         <span>Icônes HUD</span>
-        <span>Infos, bruit de foule, jour / nuit</span>
+        <span>Infos, son, jour / nuit</span>
       </div>
     </div>
   )
