@@ -2,7 +2,7 @@ const CONTACT_LINKS: { label: string; value: string; href?: string }[] = [
   { label: 'Email', value: 'ibrahimapoukone@gmail.com', href: 'mailto:ibrahimapoukone@gmail.com' },
   { label: 'Téléphone', value: '+33 7 59 86 87 22', href: 'tel:+33759868722' },
   { label: 'LinkedIn', value: 'ibrahima-poukone', href: 'https://linkedin.com/in/ibrahima-poukone' },
-  { label: 'GitHub', value: 'ibrahimapoukone', href: 'https://github.com/ibrahimapoukone' },
+  { label: 'GitHub', value: 'POUKONE', href: 'https://github.com/POUKONE' },
   { label: 'Localisation', value: 'Paris, France' },
 ]
 
