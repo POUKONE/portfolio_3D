@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
 export const BALL_RADIUS = 0.22
-export const DEFAULT_ROLL_SPEED = 6.5 // units per second
+export const DEFAULT_ROLL_SPEED = 11 // units per second
 
 function useBallTexture() {
   return useMemo(() => {

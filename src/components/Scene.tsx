@@ -49,7 +49,7 @@ const COACH_POSITION: [number, number, number] = [-(PITCH_WIDTH / 2 + 2), 0, 6]
 const REFEREE_POSITION: [number, number, number] = [1.8, 0, 1.2]
 
 const FAR_GOAL_POSITION: [number, number, number] = [0, 0, -PITCH_LENGTH / 2]
-const SHOT_SPEED = 20 // units per second — a struck shot on goal, faster than the normal roll
+const SHOT_SPEED = 32 // units per second — a struck shot on goal, faster than the normal roll
 
 const DEFAULT_CAMERA_POSITION: [number, number, number] = [0, 14, 26]
 const DEFAULT_CAMERA_TARGET: [number, number, number] = [0, 1, 0]
