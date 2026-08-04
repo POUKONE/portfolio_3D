@@ -407,14 +407,20 @@
 
 .teamsheet-row {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 6px;
   padding: 10px 14px;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
 }
 
 .teamsheet-row:last-child {
   border-bottom: none;
+}
+
+.teamsheet-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .teamsheet-number {
@@ -435,6 +441,14 @@
 .teamsheet-detail {
   color: #8fcf9e;
   font-size: 0.8rem;
+}
+
+.teamsheet-note {
+  margin: 0;
+  padding-left: 40px;
+  color: #d7e8dc;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .project-card .badges {
