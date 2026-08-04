@@ -1,5 +1,12 @@
 const EXPERIENCE = [
   {
+    club: 'Marché BTP',
+    role: 'Data / Backend Developer (Stage)',
+    period: '11/2025 - 01/2026',
+    notes:
+      'Plateforme de mise en relation entreprises/freelances du BTP autour d’appels d’offres. Conception d’un schéma PostgreSQL de 30+ tables normalisées avec migrations en production sans interruption de service, pipeline de collecte de données (BOAMP, e-Marchés Publics), géocodage/distances géospatiales (Nominatim, Haversine), et API REST (Node.js/Express) pour des dashboards analytiques.',
+  },
+  {
     club: 'SOGESCOM SARL, Cameroun',
     role: 'Stagiaire Analyse de données et Statistiques Numériques',
     period: '06/2024 - 08/2024',
@@ -19,13 +26,6 @@ const EXPERIENCE = [
     period: '06/2022 - 08/2022',
     notes:
       'Développement et maintenance de sites web dynamiques (HTML, CSS, JavaScript, PHP), conception d’interfaces utilisateur et contribution à de nouvelles fonctionnalités pour l’espace client.',
-  },
-  {
-    club: 'Projets personnels',
-    role: 'Assistant numérique & gestion hospitalière',
-    period: '08/2018 - 01/2019',
-    notes:
-      'Outil automatisé de comptes rendus de réunion (-40% de temps de rédaction), analyse de la performance et de la rentabilité commerciale d’une entreprise, et implémentation d’un système de gestion hospitalière (Linux, API REST, sécurité web).',
   },
 ]
 

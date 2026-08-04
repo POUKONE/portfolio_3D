@@ -2,39 +2,84 @@
 // trademarked brand marks pixel-for-pixel would raise the same rights issue
 // as copying a real league crest, so these are evocative, not exact.
 const SKILL_ICONS: Record<string, string> = {
-  'Power BI': '📊',
   Python: '🐍',
   R: '📐',
   SQL: '🗄️',
-  PostgreSQL: '🐘',
-  ETL: '🔄',
+  'Power BI': '📊',
+  'TensorFlow/Keras': '🧠',
   'Scikit-learn': '🤖',
   Matplotlib: '📉',
   Seaborn: '🌊',
+  ETL: '🔄',
+  Statistiques: '📈',
+
+  'Groq API': '⚡',
+  Whisper: '🎙️',
+  'LLaMA 3.3': '🦙',
+  'Prompt Engineering': '💬',
+  'Analyse sémantique': '🧩',
+  "Extraction d'info": '🔍',
+  'Web of Linked Data': '🕸️',
+
+  'Schémas relationnels': '🗂️',
+  'Migrations DB': '🔁',
+  PostgreSQL: '🐘',
+  MySQL: '🐬',
+  JSONB: '🧾',
+  Géocodage: '🗺️',
+  Haversine: '📏',
+
+  FastAPI: '🚀',
+  'Node.js/Express': '🟢',
+  SQLAlchemy: '🗃️',
+  Pydantic: '✅',
+  Alembic: '🪜',
+  PHP: '🐘',
+  Java: '☕',
+  'API REST': '🔌',
+
+  React: '⚛️',
+  'Next.js': '🧭',
+  TypeScript: '🔷',
+  JavaScript: '🟨',
   HTML: '🏗️',
   CSS: '🎨',
-  JavaScript: '🟨',
-  PHP: '🐘',
+  'Tkinter/CustomTkinter': '🖼️',
+
   Git: '🔀',
+  GitHub: '🐙',
+  'GitHub Actions': '⚙️',
+  Docker: '🐳',
+  Vercel: '🌐',
+  'Fly.io': '🪁',
+  Render: '🌩️',
   'VS Code': '💻',
-  STM32: '🔌',
-  Tinkercad: '🧊',
-  Matlab: '🧮',
-  'Microsoft Office': '📎',
-  WordPress: '📝',
-  Hostinger: '🖥️',
-  Zapier: '⚡',
 }
 
 const SKILL_GROUPS = [
   {
-    name: 'Data & Analyse',
-    tags: ['Power BI', 'Python', 'R', 'SQL', 'PostgreSQL', 'ETL', 'Scikit-learn', 'Matplotlib', 'Seaborn'],
+    name: 'Data & Machine Learning',
+    tags: ['Python', 'R', 'SQL', 'Power BI', 'TensorFlow/Keras', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'ETL', 'Statistiques'],
   },
-  { name: 'Développement Web', tags: ['HTML', 'CSS', 'JavaScript', 'PHP'] },
   {
-    name: 'Outils & Techno',
-    tags: ['Git', 'VS Code', 'STM32', 'Tinkercad', 'Matlab', 'Microsoft Office', 'WordPress', 'Hostinger', 'Zapier'],
+    name: 'IA Générative & NLP',
+    tags: ['Groq API', 'Whisper', 'LLaMA 3.3', 'Prompt Engineering', 'Analyse sémantique', "Extraction d'info", 'Web of Linked Data'],
+  },
+  {
+    name: 'Data Engineering & BDD',
+    tags: ['Schémas relationnels', 'Migrations DB', 'PostgreSQL', 'MySQL', 'JSONB', 'Géocodage', 'Haversine'],
+  },
+  {
+    name: 'Backend & API',
+    tags: ['FastAPI', 'Node.js/Express', 'SQLAlchemy', 'Pydantic', 'Alembic', 'PHP', 'Java', 'API REST'],
+  },
+  {
+    name: 'Frontend',
+    tags: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Tkinter/CustomTkinter'],
+  },
+  {
+    name: 'Outils & DevOps',
+    tags: ['Git', 'GitHub', 'GitHub Actions', 'Docker', 'Vercel', 'Fly.io', 'Render', 'VS Code'],
   },
 ]
 
