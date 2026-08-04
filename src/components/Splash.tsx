@@ -126,7 +126,7 @@ export function Splash({ onEnter }: { onEnter: (muted: boolean) => void }) {
         ⚽
       </div>
       <h1 className="name-football">{displayName}</h1>
-      <p className="subtitle">Convergence Énergie & Data — Terrain à domicile</p>
+      <p className="subtitle">Data & IA — Terrain à domicile</p>
       <button className="kickoff-btn" onClick={() => onEnter(muted)}>
         Coup d'envoi ▸
       </button>
