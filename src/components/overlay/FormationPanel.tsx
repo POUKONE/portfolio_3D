@@ -26,6 +26,8 @@ const CERTIFICATIONS: { title: string; issuer: string; period: string; notes: st
     period: '09/2026',
     notes:
       'Analyse de churn client pour XYZ Analytics (identification des données clés, démarche d’investigation stratégique), analyse de données en Python (Pandas, NumPy) avec visualisation des tendances, et modèle Random Forest optimisé (50% de rappel) accompagné d’une synthèse exécutive avec recommandations actionnables.',
+    verify:
+      'https://www.theforage.com/completion-certificates/SKZxezskWgmFjRvj9/Tcz8gTtprzAS4xSoK_SKZxezskWgmFjRvj9_69d5227590814bf6c8cf9490_1788702917194_completion_certificate.pdf',
   },
   {
     title: 'Data Science Job Simulation — British Airways',
