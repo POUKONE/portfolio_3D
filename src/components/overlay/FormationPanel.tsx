@@ -35,6 +35,8 @@ const CERTIFICATIONS: { title: string; issuer: string; period: string; notes: st
     period: '09/2026',
     notes:
       'Simulation sur le rôle de la data science dans la réussite de British Airways : scraping et analyse d’avis clients, puis modèle prédictif des facteurs influençant le comportement d’achat.',
+    verify:
+      'https://www.theforage.com/completion-certificates/tMjbs76F526fF5v3G/NjynCWzGSaWXQCxSX_tMjbs76F526fF5v3G_69d5227590814bf6c8cf9490_1788662355460_completion_certificate.pdf',
   },
   {
     title: 'Getting Started with Data',
