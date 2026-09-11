@@ -15,6 +15,7 @@ import { HelpPanel } from './components/overlay/HelpPanel'
 import { Fireworks } from './components/overlay/Fireworks'
 import { TROPHY_CURSOR } from './cursor'
 import { playKickoffFanfare } from './audio/fanfare'
+import { faviconUrl } from './favicon'
 
 export type PanelKey =
   | 'home'
@@ -136,14 +137,20 @@ function App() {
           title={muted ? 'Activer le son' : 'Couper le son'}
           onClick={() => setMuted((m) => !m)}
         >
-          {muted ? '🔇' : '🔊'}
+          <img
+            className={`hud-icon${muted ? ' hud-icon-dim' : ''}`}
+            src={faviconUrl('spotify.com')}
+            alt=""
+            width={20}
+            height={20}
+          />
         </button>
         <button
           className={`hud-btn${isNight ? ' active' : ''}`}
           title="Basculer jour / nuit"
           onClick={() => setIsNight((n) => !n)}
         >
-          {isNight ? '🌙' : '☀️'}
+          <img className="hud-icon" src={faviconUrl(isNight ? 'moongiant.com' : 'sunrise-sunset.org')} alt="" width={20} height={20} />
         </button>
       </div>
 

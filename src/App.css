@@ -139,6 +139,18 @@
   color: #1a1a1a;
 }
 
+.hud-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.hud-icon-dim {
+  opacity: 0.35;
+}
+
 /* ---------- Hotspot labels ---------- */
 .hotspot-label {
   position: relative;
@@ -397,6 +409,14 @@
 .skill-chip-icon {
   font-size: 0.95rem;
   line-height: 1;
+}
+
+img.skill-chip-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  border-radius: 3px;
+  vertical-align: middle;
 }
 
 .teamsheet {
