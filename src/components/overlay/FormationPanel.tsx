@@ -19,6 +19,31 @@ const FORMATION = [
   },
 ]
 
+const CERTIFICATIONS: { title: string; issuer: string; period: string; notes: string; verify?: string }[] = [
+  {
+    title: 'Data Science Job Simulation — BCG X',
+    issuer: 'Forage',
+    period: '09/2026',
+    notes:
+      'Analyse de churn client pour XYZ Analytics (identification des données clés, démarche d’investigation stratégique), analyse de données en Python (Pandas, NumPy) avec visualisation des tendances, et modèle Random Forest optimisé (50% de rappel) accompagné d’une synthèse exécutive avec recommandations actionnables.',
+  },
+  {
+    title: 'Data Science Job Simulation — British Airways',
+    issuer: 'Forage',
+    period: '09/2026',
+    notes:
+      'Simulation sur le rôle de la data science dans la réussite de British Airways : scraping et analyse d’avis clients, puis modèle prédictif des facteurs influençant le comportement d’achat.',
+  },
+  {
+    title: 'Getting Started with Data',
+    issuer: 'IBM SkillsBuild',
+    period: '09/2026',
+    notes:
+      'Notions fondamentales de la donnée : types de données, big data, processus d’analyse, visualisation et paysage de la data science, avec une première pratique d’un outil d’analyse (import, analyse et visualisation de données — Tableau).',
+    verify: 'https://www.credly.com/badges/84a16afb-78ed-46fb-aea2-3ace5f1526c3',
+  },
+]
+
 export function FormationPanel() {
   return (
     <div>
@@ -31,6 +56,21 @@ export function FormationPanel() {
           <h3>{f.school}</h3>
           <p className="role-label">{f.degree}</p>
           <p>{f.notes}</p>
+        </div>
+      ))}
+
+      <h3 style={{ marginTop: 28, marginBottom: 4 }}>Certifications</h3>
+      {CERTIFICATIONS.map((c) => (
+        <div className="timeline-item" key={c.title}>
+          <span className="period">{c.period}</span>
+          <h3>{c.title}</h3>
+          <p className="role-label">{c.issuer}</p>
+          <p>{c.notes}</p>
+          {c.verify && (
+            <a href={c.verify} target="_blank" rel="noreferrer" className="project-link">
+              Vérifier ▸
+            </a>
+          )}
         </div>
       ))}
     </div>
