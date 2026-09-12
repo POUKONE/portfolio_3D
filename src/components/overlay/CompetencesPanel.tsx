@@ -64,6 +64,8 @@ const SKILL_ICONS: Record<string, { domain: string } | { emoji: string }> = {
   'Fly.io': { domain: 'fly.io' },
   Render: { domain: 'render.com' },
   'VS Code': { domain: 'code.visualstudio.com' },
+  ITIL: { emoji: '📋' },
+  'Cybersécurité (Python)': { emoji: '🔒' },
 }
 
 const SKILL_GROUPS = [
@@ -105,7 +107,7 @@ const SKILL_GROUPS = [
   },
   {
     name: 'Outils & DevOps',
-    tags: ['Git', 'GitHub', 'GitHub Actions', 'Docker', 'Vercel', 'Fly.io', 'Render', 'VS Code'],
+    tags: ['Git', 'GitHub', 'GitHub Actions', 'Docker', 'Vercel', 'Fly.io', 'Render', 'VS Code', 'ITIL', 'Cybersécurité (Python)'],
   },
 ]
 
