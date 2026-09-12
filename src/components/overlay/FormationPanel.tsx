@@ -46,6 +46,24 @@ const CERTIFICATIONS: { title: string; issuer: string; period: string; notes: st
       'Notions fondamentales de la donnée : types de données, big data, processus d’analyse, visualisation et paysage de la data science, avec une première pratique d’un outil d’analyse (import, analyse et visualisation de données — Tableau).',
     verify: 'https://www.credly.com/badges/84a16afb-78ed-46fb-aea2-3ace5f1526c3',
   },
+  {
+    title: 'GenAI Job Simulation — BCG',
+    issuer: 'Forage',
+    period: '09/2026',
+    notes:
+      'Développement d’un chatbot financier propulsé par l’IA pour l’équipe GenAI Consulting de BCG : intégration et interprétation de données financières complexes issues de rapports 10-K et 10-Q, avec une logique à base de règles pour restituer des analyses financières claires et accessibles.',
+    verify:
+      'https://www.theforage.com/completion-certificates/SKZxezskWgmFjRvj9/gabev3vXhuACr48eb_SKZxezskWgmFjRvj9_69d5227590814bf6c8cf9490_1789180877242_completion_certificate.pdf',
+  },
+  {
+    title: 'Data Visualisation Job Simulation — Tata Consultancy Services',
+    issuer: 'Forage',
+    period: '09/2026',
+    notes:
+      'Création de visualisations de données pour accompagner la revue des revenus d’un client retail, préparation de questions pour un comité de direction et conception de visuels d’aide à la décision pour des dirigeants.',
+    verify:
+      'https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/MyXvBcppsW2FkNYCX_ifobHAoMjQs9s6bKS_69d5227590814bf6c8cf9490_1789194819516_completion_certificate.pdf',
+  },
 ]
 
 export function FormationPanel() {
