@@ -10,8 +10,12 @@ const SKILL_ICONS: Record<string, { domain: string } | { emoji: string }> = {
   R: { domain: 'r-project.org' },
   SQL: { emoji: '🗄️' },
   'Power BI': { domain: 'powerbi.microsoft.com' },
+  Tableau: { domain: 'tableau.com' },
   'TensorFlow/Keras': { domain: 'tensorflow.org' },
   'Scikit-learn': { domain: 'scikit-learn.org' },
+  'Random Forest': { domain: 'scikit-learn.org' },
+  Pandas: { domain: 'pandas.pydata.org' },
+  NumPy: { domain: 'numpy.org' },
   Matplotlib: { domain: 'matplotlib.org' },
   Seaborn: { domain: 'seaborn.pydata.org' },
   ETL: { domain: 'talend.com' },
@@ -32,6 +36,7 @@ const SKILL_ICONS: Record<string, { domain: string } | { emoji: string }> = {
   JSONB: { domain: 'postgresql.org' },
   Géocodage: { domain: 'nominatim.org' },
   Haversine: { emoji: '📏' },
+  'Web Scraping': { emoji: '🕷️' },
 
   FastAPI: { domain: 'fastapi.tiangolo.com' },
   'Node.js/Express': { domain: 'nodejs.org' },
@@ -63,7 +68,22 @@ const SKILL_ICONS: Record<string, { domain: string } | { emoji: string }> = {
 const SKILL_GROUPS = [
   {
     name: 'Data & Machine Learning',
-    tags: ['Python', 'R', 'SQL', 'Power BI', 'TensorFlow/Keras', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'ETL', 'Statistiques'],
+    tags: [
+      'Python',
+      'R',
+      'SQL',
+      'Power BI',
+      'Tableau',
+      'TensorFlow/Keras',
+      'Scikit-learn',
+      'Random Forest',
+      'Pandas',
+      'NumPy',
+      'Matplotlib',
+      'Seaborn',
+      'ETL',
+      'Statistiques',
+    ],
   },
   {
     name: 'IA Générative & NLP',
@@ -71,7 +91,7 @@ const SKILL_GROUPS = [
   },
   {
     name: 'Data Engineering & BDD',
-    tags: ['Schémas relationnels', 'Migrations DB', 'PostgreSQL', 'MySQL', 'JSONB', 'Géocodage', 'Haversine'],
+    tags: ['Schémas relationnels', 'Migrations DB', 'PostgreSQL', 'MySQL', 'JSONB', 'Géocodage', 'Haversine', 'Web Scraping'],
   },
   {
     name: 'Backend & API',
