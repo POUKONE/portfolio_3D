@@ -136,13 +136,7 @@ function App() {
           title={muted ? 'Activer le son' : 'Couper le son'}
           onClick={() => setMuted((m) => !m)}
         >
-          <img
-            className={`hud-icon${muted ? ' hud-icon-dim' : ''}`}
-            src={faviconUrl('spotify.com')}
-            alt=""
-            width={20}
-            height={20}
-          />
+          <span className={`hud-icon-note${muted ? ' hud-icon-dim' : ''}`}>♪</span>
         </button>
         <button
           className={`hud-btn${isNight ? ' active' : ''}`}

@@ -136,6 +136,12 @@
   opacity: 0.35;
 }
 
+.hud-icon-note {
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: opacity 0.15s ease;
+}
+
 /* ---------- Hotspot labels ---------- */
 .hotspot-label {
   position: relative;
