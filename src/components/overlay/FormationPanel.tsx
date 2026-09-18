@@ -7,7 +7,7 @@ const FORMATION = [
   },
   {
     school: 'Prépa Saint Jean, Douala, Cameroun',
-    degree: 'Cycle Préparatoire',
+    degree: 'CPGE',
     period: '2022 - 2024',
     notes: 'Classe préparatoire aux grandes écoles d’ingénieurs.',
   },
