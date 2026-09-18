@@ -34,6 +34,7 @@ const SKILL_ICONS: Record<string, { domain: string } | { emoji: string }> = {
   'Migrations DB': { emoji: '🔁' },
   PostgreSQL: { domain: 'postgresql.org' },
   MySQL: { domain: 'mysql.com' },
+  'Oracle Database': { domain: 'oracle.com' },
   JSONB: { domain: 'postgresql.org' },
   Géocodage: { domain: 'nominatim.org' },
   Haversine: { emoji: '📏' },
@@ -95,7 +96,7 @@ const SKILL_GROUPS = [
   },
   {
     name: 'Data Engineering & BDD',
-    tags: ['Schémas relationnels', 'Migrations DB', 'PostgreSQL', 'MySQL', 'JSONB', 'Géocodage', 'Haversine', 'Web Scraping'],
+    tags: ['Schémas relationnels', 'Migrations DB', 'PostgreSQL', 'MySQL', 'Oracle Database', 'JSONB', 'Géocodage', 'Haversine', 'Web Scraping'],
   },
   {
     name: 'Backend & API',

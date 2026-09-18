@@ -64,6 +64,13 @@ const CERTIFICATIONS: { title: string; issuer: string; period: string; notes: st
     verify:
       'https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/MyXvBcppsW2FkNYCX_ifobHAoMjQs9s6bKS_69d5227590814bf6c8cf9490_1789194819516_completion_certificate.pdf',
   },
+  {
+    title: 'Oracle Database Explorer Assessment',
+    issuer: 'Oracle MyLearn / Oracle University',
+    period: '2026',
+    notes:
+      'Évaluation sur les fondamentaux d’Oracle Database : concepts et architecture, SQL et bases de l’administration, réussie avec un score de 95%.',
+  },
 ]
 
 export function FormationPanel() {
