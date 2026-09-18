@@ -13,7 +13,6 @@ import { LanguagesPanel } from './components/overlay/LanguagesPanel'
 import { ContactPanel } from './components/overlay/ContactPanel'
 import { HelpPanel } from './components/overlay/HelpPanel'
 import { Fireworks } from './components/overlay/Fireworks'
-import { TROPHY_CURSOR } from './cursor'
 import { playKickoffFanfare } from './audio/fanfare'
 import { faviconUrl } from './favicon'
 
@@ -110,7 +109,7 @@ function App() {
   }
 
   return (
-    <div className="experience" style={{ cursor: TROPHY_CURSOR }}>
+    <div className="experience">
       <div className="canvas-wrap">
         <Scene
           isNight={isNight}
